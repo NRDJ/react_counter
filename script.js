@@ -15,22 +15,23 @@ var Counter = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (Counter.__proto__ || Object.getPrototypeOf(Counter)).call(this, props));
 
     _this.state = { count: 0 };
-    _this.addCount = _this.addCount.bind(_this);
     return _this;
   }
 
   _createClass(Counter, [{
     key: 'addCount',
-    value: function addCount() {
+    value: function addCount(amount) {
       console.log(this);
       // add 1 to this.state.count
       this.setState({
-        count: this.state.count + 1
+        count: this.state.count + amount
       });
     }
   }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       return React.createElement(
         'div',
         null,
@@ -42,8 +43,24 @@ var Counter = function (_React$Component) {
         ),
         React.createElement(
           'button',
-          { onClick: this.addCount },
+          { onClick: function onClick() {
+              return _this2.addCount(1);
+            } },
           '+1'
+        ),
+        React.createElement(
+          'button',
+          { onClick: function onClick() {
+              return _this2.addCount(2);
+            } },
+          '+2'
+        ),
+        React.createElement(
+          'button',
+          { onClick: function onClick() {
+              return _this2.addCount(3);
+            } },
+          '+3'
         )
       );
     }
