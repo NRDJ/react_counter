@@ -30,7 +30,56 @@ class Counter extends React.Component {
       );
     }
   }
+
+  class ScrollLogger extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        scrollY: 0
+      };
+  
+      // bind to the class object so updateScrollY can access this.setState
+      this.updateScrollY = this.updateScrollY.bind(this);
+    };
+  
+    updateScrollY(e) {
+      this.setState({ scrollY: Math.round(window.scrollY) });
+    }
+  
+    componentDidMount() {
+      window.addEventListener('scroll', this.updateScrollY);
+    }
+  
+    componentWillUnmount() {
+      window.removeEventListener('scroll', this.updateScrollY);
+    }
+  
+    render() {
+      return (
+        <div className="position-fixed bg-white p-3" style={{position: 'fixed', right: 0, top: 0}}>
+          Scrolled: {this.state.scrollY}px
+        </div>
+      )
+    }
+  }
+
+  const App = () => {
+
+    return (
+  
+      <React.Fragment>
+  
+        <Counter />  
+  
+        <ScrollLogger />
+  
+      </React.Fragment>
+  
+    )
+  
+  }
+
   ReactDOM.render(
-    <Counter />,
+    <App />,
     document.getElementById('root')
   );
